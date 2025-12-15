@@ -35,7 +35,7 @@ Tablas de la base de datos: **Usuarios**, **Direcciones** y **Tareas**.
 |   `idDireccion` |   NUMBER      | `PRIMARY KEY`, Autoincremento |
 |   `calle`       |   VARCHAR     | `NOT NULL`        |
 |   `numero`      |   VARCHAR     | `NOT NULL`, debe ser mayor que 0 |
-|   `codpostal`   |   NUMBER      | `NOT NULL`, exactamente 5 dígitos |
+|   `codPostal`   |   NUMBER      | `NOT NULL`, exactamente 5 dígitos |
 |   `municipio`   |   VARCHAR     | `NOT NULL`        |
 |   `provincia`   |   VARCHAR     | `NOT NULL`, debe ser una provincia de Andalucía |
 |   `username`    |   VARCHAR     | `FOREIGN KEY`     |
@@ -47,7 +47,7 @@ Tablas de la base de datos: **Usuarios**, **Direcciones** y **Tareas**.
 |   `nombre`      |   VARCHAR     | `NOT NULL`        |
 |   `descripcion` |   TEXT        | -                 |
 |   `estado`      |   BOOLEAN     | Por defecto `false` |
-|   `fechaFin`    |   DATE        | No puede ser anterior a la fecha actual |
+|   `fechaFin`    |   DATETIME    | No puede ser anterior a la fecha actual |
 |   `username`    |   VARCHAR     | `FOREIGN KEY`     |
 |   `idDireccion` |   NUMBER      | `FOREIGN KEY`     |
 
@@ -55,3 +55,40 @@ Tablas de la base de datos: **Usuarios**, **Direcciones** y **Tareas**.
 ---
 
 
+## 📑 DIAGRAMA ENTIDAD-RELACIÓN 📑
++ USUARIO (1:N) <- TIENE (M:N) ->  DIRECCION (1:N)
++ USUARIO (0:1) <- REALIZA (1:N) -> TAREA (0:N)
++ DIRECCION (1:1) <- CONTIENE (1:N) -> TAREA (0:N)
+
+```mermaid
+erDiagram
+  USUARIO }|--|{ DIRECCION : TIENE
+  USUARIO o|--o{ TAREA : REALIZA
+  DIRECCION ||--o{ TAREA : CONTIENE
+  TAREA
+  USUARIO {
+    String username
+    String nombre
+    String apellidos
+    String email
+    String password
+    String roles
+  }
+  DIRECCION {
+    int idDireccion
+    String calle
+    String numero
+    int codPostal
+    String municipio
+    String provincia
+    String username
+  }
+  TAREA {
+    int idTarea
+    String nombre
+    String descripcion
+    boolean estado
+    LocalDateTime fechaFin
+    String username
+    int idDireccion
+  }
