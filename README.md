@@ -21,35 +21,35 @@ Tablas de la base de datos: **Usuarios**, **Direcciones** y **Tareas**.
 ## 💾 TABLAS DE LA BASE DE DATOS 💾
 ### 👨 Usuarios 👨
 |      CAMPO      |     TIPO      |   RESTRICCIONES                                               |
-|   :---------:   |  :-------:    | :---------------:                                             |
-|   `username`    |   VARCHAR     |  `PRIMARY KEY`, longitud: 5-20                                |
-|   `nombre`      |   VARCHAR     |  `NOT NULL`                                                   |
-|   `apellidos`   |   VARCHAR     |  -                                                            |
-|   `email`       |   VARCHAR     |  `NOT NULL`, `UNIQUE`, debe contener @ y terminar en .com/.es |
-|   `password`    |   VARCHAR     |  `NOT NULL`, longitud: 5-20                                               |
-|   `roles`       |   VARCHAR     |  Valores: `ADMIN` / `USER`                                    |
+|   :---------:   |   :-------:   | :---------------------------------------------                |
+|   `username`    |    VARCHAR    |  `PRIMARY KEY`, longitud: 5-20                                |
+|   `nombre`      |    VARCHAR    |  `NOT NULL`                                                   |
+|   `apellidos`   |    VARCHAR    |  -                                                            |
+|   `email`       |    VARCHAR    |  `NOT NULL`, `UNIQUE`, debe contener @ y terminar en .com/.es |
+|   `password`    |    VARCHAR    |  `NOT NULL`, longitud: 5-20                                   |
+|   `roles`       |    VARCHAR    |  Valores: `ADMIN` / `USER`                                    |
 
 ### 🏠 Direcciones 🏠
 |      CAMPO      |     TIPO      |   RESTRICCIONES                                  |
-|   :---------:   |  :-------:    | :---------------:                                |
-|   `idDireccion` |   NUMBER      | `PRIMARY KEY`, Autoincremento                    |
-|   `calle`       |   VARCHAR     | `NOT NULL`                                       |
-|   `numero`      |   VARCHAR     | `NOT NULL`, debe ser mayor que 0                 |
-|   `codPostal`   |   NUMBER      | `NOT NULL`, exactamente 5 dígitos                |
-|   `municipio`   |   VARCHAR     | `NOT NULL`                                       |
-|   `provincia`   |   VARCHAR     | `NOT NULL`, debe ser una provincia de Andalucía  |
-|   `username`    |   VARCHAR     | `FOREIGN KEY`                                    |
+|   :---------:   |   :-------:   | :-----------------------------------------       |
+|   `idDireccion` |    NUMBER     | `PRIMARY KEY`, Autoincremento                    |
+|   `calle`       |    VARCHAR    | `NOT NULL`                                       |
+|   `numero`      |    VARCHAR    | `NOT NULL`, debe ser mayor que 0                 |
+|   `codPostal`   |    NUMBER     | `NOT NULL`, exactamente 5 dígitos                |
+|   `municipio`   |    VARCHAR    | `NOT NULL`                                       |
+|   `provincia`   |    VARCHAR    | `NOT NULL`, debe ser una provincia de Andalucía  |
+|   `username`    |    VARCHAR    | `FOREIGN KEY`                                    |
 
 ### 📃 Tareas 📃
 |      CAMPO      |     TIPO      |   RESTRICCIONES                         |
-|   :---------:   |  :-------:    | :---------------:                       |
-|   `idTarea`     |   NUMBER      | `PRIMARY KEY`, Autoincremento           |
-|   `nombre`      |   VARCHAR     | `NOT NULL`                              |
-|   `descripcion` |   TEXT        | -                                       |
-|   `estado`      |   BOOLEAN     | Por defecto `false`                     |
-|   `fechaFin`    |   DATETIME    | No puede ser anterior a la fecha actual |
-|   `username`    |   VARCHAR     | `FOREIGN KEY`                           |
-|   `idDireccion` |   NUMBER      | `FOREIGN KEY`                           |
+|   :---------:   |   :-------:   | :-----------------------------------    |
+|   `idTarea`     |    NUMBER     | `PRIMARY KEY`, Autoincremento           |
+|   `nombre`      |    VARCHAR    | `NOT NULL`                              |
+|   `descripcion` |    TEXT       | -                                       |
+|   `estado`      |    BOOLEAN    | Por defecto `false`                     |
+|   `fechaFin`    |    DATETIME   | No puede ser anterior a la fecha actual |
+|   `username`    |    VARCHAR    | `FOREIGN KEY`                           |
+|   `idDireccion` |    NUMBER     | `FOREIGN KEY`                           |
 
 ---
 ---
@@ -99,35 +99,35 @@ erDiagram
 
 ## 🔗 ENDPOINTS 🔗
 ### 👨 UsuarioController 👨
-|      MÉTODO     |      ENDPOINT            |   DESCRIPCIÓN                     |  ACCESO   |
-|   :---------:   |   :------------:         | :---------------:                 |:---------:|
-|   POST          |   `/usuario`             |  Inicio de sesión                 | Público   |
-|   POST          |   `/usuarios`            |  Registrar usuarios               | Público   |
-|   GET           |   `/usuarios`            |  Listar usuarios                  | ADMIN     |
-|   PUT           |   `/usuarios`            |  Actualizar usuario (propio)      | USER      |
-|   PUT           |   `/usuarios/{username}` |  Actualizar usuarios (todos)      | ADMIN     |
-|   DELETE        |   `/usuarios`            |  Eliminar usuario (propio)        | USER      |
-|   DELETE        |   `/usuarios/{username}` |  Eliminar usuarios (todos)        | ADMIN     |
+|   MÉTODO   |      ENDPOINT            |   DESCRIPCIÓN                 |   ACCESO   |
+|  :------:  |   :-----------------     | :---------------------------  | :--------: |
+|   POST     |   `/usuario`             |  Inicio de sesión             |  Público   |
+|   POST     |   `/usuarios`            |  Registrar usuarios           |  Público   |
+|   GET      |   `/usuarios`            |  Listar usuarios              |  ADMIN     |
+|   PUT      |   `/usuarios`            |  Actualizar usuario (propio)  |  USER      |
+|   PUT      |   `/usuarios/{username}` |  Actualizar usuarios (todos)  |  ADMIN     |
+|   DELETE   |   `/usuarios`            |  Eliminar usuario (propio)    |  USER      |
+|   DELETE   |   `/usuarios/{username}` |  Eliminar usuarios (todos)    |  ADMIN     |
 
 ### 🏠 DireccionController 🏠
-|      MÉTODO     |      ENDPOINT               |   DESCRIPCIÓN                      |  ACCESO   |
-|   :---------:   |   :------------:            | :---------------:                  |:---------:|
-|   POST          |   `/direcciones`            |  Registrar direcciones             | USER      |
-|   GET           |   `/direcciones`            |  Listar direcciones (propias)      | USER      |
-|   GET           |   `/direcciones/{username}` |  Listar direcciones (todas)        | ADMIN     |
-|   PUT           |   `/direcciones/{id}`       |  Actualizar direcciones            | USER      |
-|   DELETE        |   `/direcciones/{id}`       |  Eliminar direcciones (propias)    | USER      |
-|   DELETE        |   `/direcciones/{username}` |  Eliminar direcciones (todas)      | ADMIN     |
+|   MÉTODO  |      ENDPOINT               |   DESCRIPCIÓN                    |   ACCESO  |
+|  :------: |   :-------------------      | :-----------------------------   | :--------:|
+|  POST     |   `/direcciones`            |  Registrar direcciones           |  USER     |
+|  GET      |   `/direcciones`            |  Listar direcciones (propias)    |  USER     |
+|  GET      |   `/direcciones/{username}` |  Listar direcciones (todas)      |  ADMIN    |
+|  PUT      |   `/direcciones/{id}`       |  Actualizar direcciones          |  USER     |
+|  DELETE   |   `/direcciones/{id}`       |  Eliminar direcciones (propias)  |  USER     |
+|  DELETE   |   `/direcciones/{username}` |  Eliminar direcciones (todas)    |  ADMIN    |
 
 ### 📃 TareaController 📃
-|      MÉTODO     |      ENDPOINT          |   DESCRIPCIÓN                      |  ACCESO   |
-|   :---------:   |   :------------:       | :---------------:                  |:---------:|
-|   POST          |   `/tareas`            |  Registrar tareas                  | USER      |
-|   GET           |   `/tareas`            |  Listar tareas (propias)           | USER      |
-|   GET           |   `/tareas/{username}` |  Listar tareas (todas)             | ADMIN     |
-|   PUT           |   `/tareas/{id}`       |  Actualizar tareas                 | USER      |
-|   DELETE        |   `/tareas/{id}`       |  Eliminar tareas (propias)         | USER      |
-|   DELETE        |   `/tareas/{username}` |  Eliminar tareas (todas)           | ADMIN     |
+|   MÉTODO   |      ENDPOINT          |   DESCRIPCIÓN               |  ACCESO  |
+|  :------:  |   :------------------  | :------------------------   |:--------:|
+|  POST      |   `/tareas`            |  Registrar tareas           | USER     |
+|  GET       |   `/tareas`            |  Listar tareas (propias)    | USER     |
+|  GET       |   `/tareas/{username}` |  Listar tareas (todas)      | ADMIN    |
+|  PUT       |   `/tareas/{id}`       |  Actualizar tareas          | USER     |
+|  DELETE    |   `/tareas/{id}`       |  Eliminar tareas (propias)  | USER     |
+|  DELETE    |   `/tareas/{username}` |  Eliminar tareas (todas)    | ADMIN    |
 
 ---
 ---
@@ -171,3 +171,16 @@ erDiagram
 
 ---
 ---
+
+
+## 🆗 CÓDIGOS HTTP ❌
+|    CÓDIGO    |      NOMBRE               |   USO                            |
+|  :--------:  |   :------------:          | :------------------------------  |
+|  `200`       |   `OK`                    |  Operación exitosa               |
+|  `201`       |   `Created`               |  POST crea recurso correctamente |
+|  `204`       |   `No Content`            |  GET sin datos                   |
+|  `400`       |   `Bad Request`           |  Datos inválidos                 |
+|  `403`       |   `Forbidden`             |  Usuario sin permisos            |
+|  `404`       |   `Not Found`             |  Recurso inexistente             |
+|  `409`       |   `Conflict`              |  Recurso duplicado               |
+|  `500`       |   `Internal Server Error` |  Fallo interno inesperado        |
