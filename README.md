@@ -34,8 +34,8 @@ Tablas de la base de datos: **Usuarios**, **Direcciones** y **Tareas**.
 |   :---------:   |   :-------:   | :-----------------------------------------       |
 |   `idDireccion` |    NUMBER     | `PRIMARY KEY`, Autoincremento                    |
 |   `calle`       |    VARCHAR    | `NOT NULL`                                       |
-|   `numero`      |    VARCHAR    | `NOT NULL`, debe ser mayor que 0                 |
-|   `codPostal`   |    NUMBER     | `NOT NULL`, exactamente 5 dígitos                |
+|   `numero`      |    NUMBER     | `NOT NULL`, debe ser mayor que 0                 |
+|   `codPostal`   |    VARCHAR    | `NOT NULL`, exactamente 5 dígitos                |
 |   `municipio`   |    VARCHAR    | `NOT NULL`                                       |
 |   `provincia`   |    VARCHAR    | `NOT NULL`, debe ser una provincia de Andalucía  |
 |   `username`    |    VARCHAR    | `FOREIGN KEY`                                    |
